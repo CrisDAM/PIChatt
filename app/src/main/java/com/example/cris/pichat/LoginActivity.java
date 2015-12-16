@@ -6,14 +6,46 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ProgressBar;
+import android.widget.Toast;
+
+import com.parse.LogInCallback;
+import com.parse.ParseUser;
+
+import java.text.ParseException;
 
 
 public class LoginActivity extends ActionBarActivity {
+    private EditText editNom;
+    private EditText editPass;
+    private ProgressBar pb;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        editNom = (EditText) findViewById(R.id.usernameField);
+        editPass = (EditText) findViewById(R.id.passwordField);
+        pb = (ProgressBar) findViewById(R.id.progressBar);
+
+    }
+    public void onclickLogIn(View v){
+        pb.setVisibility(View.VISIBLE);
+        ParseUser.logInInBackground(editNom.getText().toString(), editPass.getText().toString(), new LogInCallback() {
+            @Override
+            public void done(ParseUser user, com.parse.ParseException e) {
+                if (user != null) {
+                    Toast.makeText(LoginActivity.this, "Usuarioo correcto", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(LoginActivity.this, "Usuarioo incorrecto", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        pb.setVisibility(View.INVISIBLE);
     }
 
     public void signUpOnClick(View view){

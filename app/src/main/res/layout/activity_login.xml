@@ -30,7 +30,8 @@
         android:text="@string/login_button"
         android:id="@+id/button"
         android:layout_below="@+id/passwordField"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:onClick="onclickLogIn" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -42,4 +43,12 @@
         android:onClick="signUpOnClick"
         android:clickable="true"
         android:textSize="24sp" />
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progressBar"
+        android:layout_above="@+id/signUpText"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible" />
 </RelativeLayout>
